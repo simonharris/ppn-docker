@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap');
+
+
+body {
+  /* font-family: 'Playfair Display', serif; */
+  font-family: 'Roboto'; /* , helvetica, arial, sans-serif; */
+  background-color: #708090;
+  color: white;
+}
+
+h1, p.lead {
+  font-weight: 100;
+}
+
+h1 a{
+  text-decoration: none !important;
+  color: white !important;
+}
+
+a {
+  color: #cacaca;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.h-overlay {
+  height: 35%;
+  --bs-bg-opacity: .8;
+}
+
+.magenta { background-color: magenta; }
+.yellow { background-color: yellow; }
+.cyan { background-color: cyan; }
+
+p.breadcrumb, .btn-visit {
+  font-variant: small-caps;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.btn-visit a:hover {
+  text-decoration: none;
+}
+
+code {
+  color: inherit; /* or any other color you prefer */
+}
+
+.pink { background-color: pink }
+.yellow { background-color: yellow }
+.green { background-color: green }
+
+
