@@ -11,4 +11,4 @@ build:
 	docker build -t my-vue-site .
 
 run: build
-	docker run -p 5173:5173 my-vue-site
+	docker run --rm -p 5173:5173 my-vue-site
