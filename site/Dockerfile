@@ -1,13 +1,14 @@
-FROM node:alpine
-
+# Build stage
+FROM node:alpine AS build
 WORKDIR /site
-
 COPY package*.json ./
-
 RUN npm install
-
 COPY . .
+RUN npm run build
 
-EXPOSE 5173
-
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+# Production stage
+FROM nginx:alpine
+COPY --from=build /site/dist /usr/share/nginx/html
+COPY default.conf /etc/nginx/conf.d/default.conf
+EXPOSE 5001
+CMD ["nginx", "-g", "daemon off;"]
