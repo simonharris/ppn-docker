@@ -1,7 +1,7 @@
 services:
 
   api:
-    image: my-flask-api:latest
+    image: ppn-api:latest
     labels:
       - "traefik.http.routers.api.rule=Host(`projects-api.pointbeing.net`, `projects-api.localhost`)"
       - "traefik.http.services.api.loadbalancer.server.port=5000"
@@ -9,7 +9,7 @@ services:
       - "5000:5000"
 
   web:
-    image: my-vue-site:latest
+    image: ppn-site:latest
     labels:
       - "traefik.http.routers.web.rule=Host(`projects.pointbeing.net`, `projects.localhost`)"
       - "traefik.http.services.web.loadbalancer.server.port=5001"
@@ -18,11 +18,11 @@ services:
     depends_on:
       - api
 
-  traefik:
-    image: traefik:v2.10
-    command: --api.insecure=true --providers.docker
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  # traefik:
+  #   image: traefik:v2.10
+  #   command: --api.insecure=true --providers.docker
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
