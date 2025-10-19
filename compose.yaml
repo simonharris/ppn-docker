@@ -4,7 +4,9 @@ services:
     build: ./api
     image: ppn-api:latest
     labels:
-      - "traefik.http.routers.api.rule=Host(`projects-api.pointbeing.net`, `projects-api.localhost`)"
+      - "traefik.http.routers.api.rule=Host(`projects-api.pointbeing.net`)"
+      - "traefik.http.routers.api.tls=true"
+      - "traefik.http.routers.api.tls.certresolver=letsencrypt" 
       - "traefik.http.services.api.loadbalancer.server.port=5000"
     networks:
       - traefik_default
@@ -16,7 +18,9 @@ services:
     build: ./site
     image: ppn-site:latest
     labels:
-      - "traefik.http.routers.web.rule=Host(`projects.pointbeing.net`, `projects.localhost`)"
+      - "traefik.http.routers.web.rule=Host(`projects.pointbeing.net`)"
+      - "traefik.http.routers.web.tls=true"
+      - "traefik.http.routers.web.tls.certresolver=letsencrypt"
       - "traefik.http.services.web.loadbalancer.server.port=5001"
     networks:
       - traefik_default
