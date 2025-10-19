@@ -8,6 +8,7 @@ services:
       - "traefik.http.services.api.loadbalancer.server.port=5000"
     ports:
       - "5000:5000"
+    restart: unless-stopped
 
   web:
     build: ./site
@@ -19,6 +20,7 @@ services:
       - "5001:5001"
     depends_on:
       - api
+    restart: unless-stopped
 
   # traefik:
   #   image: traefik:v2.10
