@@ -1,6 +1,6 @@
 
 build:
-	docker build -t my-flask-api .
+	docker build -t ppn-api .
 
 run: build
-	docker run --rm -p 5000:5000 my-flask-api
+	docker run --rm -p 5000:5000 ppn-api

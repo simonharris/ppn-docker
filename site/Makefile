@@ -8,7 +8,7 @@ fix:
 	npm install
 
 build:
-	docker build -t my-vue-site .
+	docker build -t ppn-site .
 
 run: build
-	docker run --rm -p 5001:5001 my-vue-site
+	docker run --rm -p 5001:5001 ppn-site
