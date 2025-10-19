@@ -1,6 +1,7 @@
 services:
 
   api:
+    build: ./api
     image: ppn-api:latest
     labels:
       - "traefik.http.routers.api.rule=Host(`projects-api.pointbeing.net`, `projects-api.localhost`)"
@@ -9,6 +10,7 @@ services:
       - "5000:5000"
 
   web:
+    build: ./site
     image: ppn-site:latest
     labels:
       - "traefik.http.routers.web.rule=Host(`projects.pointbeing.net`, `projects.localhost`)"
