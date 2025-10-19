@@ -6,6 +6,8 @@ services:
     labels:
       - "traefik.http.routers.api.rule=Host(`projects-api.pointbeing.net`, `projects-api.localhost`)"
       - "traefik.http.services.api.loadbalancer.server.port=5000"
+    networks:
+      - traefik_default
     ports:
       - "5000:5000"
     restart: unless-stopped
@@ -16,11 +18,21 @@ services:
     labels:
       - "traefik.http.routers.web.rule=Host(`projects.pointbeing.net`, `projects.localhost`)"
       - "traefik.http.services.web.loadbalancer.server.port=5001"
+    networks:
+      - traefik_default
     ports:
       - "5001:5001"
     depends_on:
       - api
     restart: unless-stopped
+
+
+networks:
+  traefik_default:
+    name: traefik_default
+    external: true
+
+
 
   # traefik:
   #   image: traefik:v2.10
