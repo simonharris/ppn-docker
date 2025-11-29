@@ -31,8 +31,8 @@ export default {
   data() {
     return {
       pageConfig: {
-        title: 'Default title',
-        headline: 'Default headline'
+        title: 'Page not found',
+        headline: 'Sorry about that'
       }
     }
   },
