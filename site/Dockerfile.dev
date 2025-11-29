@@ -1,0 +1,7 @@
+# Build stage
+FROM node:alpine
+WORKDIR /site
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 5001

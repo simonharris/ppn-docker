@@ -2,14 +2,22 @@
 build_dev:
 	docker compose -f compose.dev.yaml build
 
-dev: build_dev
+run_dev: build_dev
 	docker compose -f compose.dev.yaml up -d
 
-stop_dev:
+down_dev:
 	docker compose -f compose.dev.yaml down
 
-# build:
-# 	docker compose build
+clean_dev:
+	rm -rf site/node_modules package-lock.json
+	docker compose -f compose.dev.yaml build site
+	docker compose -f compose.dev.yaml run --rm site npm install
 
-# run:
-# 	docker compose up --build -d
+build:
+	docker compose -f compose.yaml build
+
+run: build
+	docker compose -f compose.yaml up -d
+
+down:
+	docker compose -f compose.yaml down

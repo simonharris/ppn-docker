@@ -9,3 +9,17 @@ services:
     ports:
       - "5000:5000"
     command: gunicorn main:app --workers 1 --bind 0.0.0.0:5000 --reload
+
+  site:
+    build:
+      context: ./site
+      dockerfile: Dockerfile.dev
+    image: ppn-site:latest
+    volumes:
+    - ./site:/app
+    working_dir: /app
+    ports:
+      - "5001:5001"
+    depends_on:
+      - api
+    command: npm run dev
