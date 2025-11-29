@@ -1,0 +1,11 @@
+
+services:
+  api:
+    build: ./api
+    image: ppn-api:latest
+    volumes:
+    - ./api:/app
+    working_dir: /app
+    ports:
+      - "5000:5000"
+    command: gunicorn main:app --workers 1 --bind 0.0.0.0:5000 --reload
