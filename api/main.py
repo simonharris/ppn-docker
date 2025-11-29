@@ -22,6 +22,10 @@ db.init_app(app)
 ## library --------------------------------------------------------------------
 
 
+class ProjectNotFound(Exception):
+    pass
+
+
 class Project(db.Model):
 
     __tablename__ = 'projects'
@@ -61,9 +65,12 @@ def get_all_projects() -> list:
         return db.session.execute(db.select(Project).where(Project.status == 1).order_by(Project.order)).scalars().all()
 
 
-def get_project_detail(slug: str) -> dict:
+def get_project_detail(slug: str) -> Project:
     with app.app_context():
-        return db.session.execute(db.select(Project).where(Project.slug == slug)).scalar()
+        project = db.session.execute(db.select(Project).where(Project.slug == slug)).scalar()
+        if project is None:
+            raise ProjectNotFound(f"Project with slug '{slug}' not found")
+        return project
 
 
 ## routes ---------------------------------------------------------------------
@@ -77,8 +84,11 @@ def api_list():
 
 @app.route('/api/detail/<slug>')
 def api_detail(slug):
-    project = get_project_detail(slug)
-    return jsonify(project=project.to_dict())
+    try:
+        project = get_project_detail(slug)
+        return jsonify(project=project.to_dict())
+    except ProjectNotFound:
+        return jsonify({'error': 'Project not found'}), 404
 
 
 @app.route('/')
