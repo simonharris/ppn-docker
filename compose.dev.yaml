@@ -23,3 +23,15 @@ services:
     depends_on:
       - api
     command: npm run dev
+
+  sqlite-web:
+    image: coleifer/sqlite-web:latest
+    container_name: ppn-sqlite-web
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./api/instance/projects.db:/data/projects.db
+    environment:
+      - SQLITE_DATABASE=/data/projects.db
+    restart: unless-stopped
+
