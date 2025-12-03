@@ -24,14 +24,28 @@ services:
       - api
     command: npm run dev
 
+  # sqlite-web:
+  #   image: coleifer/sqlite-web:latest
+  #   container_name: ppn-sqlite-web
+  #   ports:
+  #     - "8080:8080"
+  #   volumes:
+  #     - ./api/instance/projects.db:/data/projects.db
+  #   environment:
+  #     - SQLITE_DATABASE=/data/projects.db
+  #   restart: unless-stopped
+
   sqlite-web:
-    image: coleifer/sqlite-web:latest
+    build:
+      context: ../sqlite-web
+      dockerfile: docker/Dockerfile
     container_name: ppn-sqlite-web
     ports:
       - "8080:8080"
     volumes:
       - ./api/instance/projects.db:/data/projects.db
+      - ../sqlite-web:/app   # mounts local code
     environment:
       - SQLITE_DATABASE=/data/projects.db
     restart: unless-stopped
-
+    command: ["python", "/app/sqlite_web/sqlite_web.py", "--host", "0.0.0.0", "--debug", "/data/projects.db"]

@@ -20,4 +20,4 @@ run: build
 	docker compose -f compose.yaml up -d
 
 down:
-	docker compose -f compose.yaml down
+	docker compose -f compose.yaml down --remove-orphans
