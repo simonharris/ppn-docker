@@ -5,7 +5,7 @@
 <hr class="mx-0">
 <footer class="row">
    <div class="col-sm-6 d-flex align-items-center">
-        <span>&copy; 2025 <a href="https://simon.colchester.social/">Simon Harding</a>.</span>
+        <span>&copy; 2013-{{ new Date().getFullYear() }} <a href="https://simon.colchester.social/">Simon Harding</a>.</span>
     </div>
     <div class="col-sm-6 text-sm-end fs-4">
         <a href="https://simon.colchester.social"><i class="me-2 bi bi-bluesky"></i></a>
